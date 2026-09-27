@@ -1,0 +1,30 @@
+{{define "gore"}}
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.}} | Електро заявки</title>
+    <link rel="stylesheet" href="/static/stil.css">
+</head>
+<body>
+    <header class="gorna-lenta">
+        <div class="kontejner lenta">
+            <a href="/" class="logo">⚡ Електро заявки</a>
+            <nav>
+                <a href="/zaiavka">Нова заявка</a>
+                <a href="/kontakti">Контакти</a>
+            </nav>
+        </div>
+    </header>
+    <main class="kontejner">
+{{end}}
+
+{{define "dolu"}}
+    </main>
+    <footer class="dolna-lenta">
+        <div class="kontejner">Електро заявки · Пловдив</div>
+    </footer>
+</body>
+</html>
+{{end}}

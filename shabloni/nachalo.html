@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <title>{{.Zaglavie}}</title>
-</head>
-<body>
+{{template "gore" "Начало"}}
+
+<section class="karta geroi">
     <h1>{{.Zaglavie}}</h1>
     <p>{{.Opisanie}}</p>
-    <a href="/kontakti">Контакти</a>
-    <a href="/zaiavka">Нова заявка</a>
-    <a href="/zaiavki">Всички заявки</a>
-</body>
-</html>
+    <a href="/zaiavka" class="buton">Подай заявка</a>
+</section>
+
+{{template "dolu"}}

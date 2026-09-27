@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <title>Контакти</title>
-</head>
-<body>
-    <h1>Контакти</h1>
-    <p>Телефон: {{.Telefon}}</p>
-    <p>Адрес: {{.Adres}}</p>
-    <p>Работно време: {{.RabotnoVreme}}</p>
-    <a href="/">Към началото</a>
-</body>
-</html>
+{{template "gore" "Контакти"}}
+
+<h1>Контакти</h1>
+<div class="karta">
+    <p><strong>Телефон:</strong> {{.Telefon}}</p>
+    <p><strong>Адрес:</strong> {{.Adres}}</p>
+    <p><strong>Работно време:</strong> {{.RabotnoVreme}}</p>
+</div>
+
+{{template "dolu"}}

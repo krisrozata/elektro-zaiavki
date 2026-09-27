@@ -1,27 +1,27 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <title>Нова заявка</title>
-</head>
-<body>
-    <h1>Нова заявка</h1>
+{{template "gore" "Нова заявка"}}
 
-    <form method="POST" action="/zaiavka">
-        <p>Име:<br><input type="text" name="ime" required></p>
-        <p>Телефон:<br><input type="tel" name="telefon" required></p>
-        <p>Адрес:<br><input type="text" name="adres"></p>
-        <p>Вид работа:<br>
+<h1>Нова заявка</h1>
+<form method="POST" action="/zaiavka" class="karta">
+    <label>Име
+        <input type="text" name="ime" required>
+    </label>
+    <label>Телефон
+        <input type="tel" name="telefon" required>
+    </label>
+    <label>Адрес
+        <input type="text" name="adres">
+    </label>
+    <label>Вид работа
         <select name="vid">
-        <option value="Ремонт">Ремонт</option>
-        <option value="Монтаж">Монтаж</option>
-        <option value="Проверка на инсталация">Проверка на инсталация</option>
-            </select>
-        </p>
-        <p>Какъв е проблемът:<br><textarea name="opisanie" rows="4"></textarea></p>
-        <button type="submit">Изпрати</button>
-    </form>
+            <option value="Ремонт">Ремонт</option>
+            <option value="Монтаж">Монтаж</option>
+            <option value="Проверка на инсталация">Проверка на инсталация</option>
+        </select>
+    </label>
+    <label>Какъв е проблемът
+        <textarea name="opisanie" rows="4"></textarea>
+    </label>
+    <button type="submit" class="buton">Изпрати заявката</button>
+</form>
 
-    <a href="/">Към началото</a>
-</body>
-</html>
+{{template "dolu"}}

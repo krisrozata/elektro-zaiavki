@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <title>Заявки</title>
-</head>
-<body>
-    <h1>Заявки</h1>
-    <p>Общо заявки: {{.Broi}}</p>
+{{template "gore" "Заявки"}}
 
-    <table border="1" cellpadding="6">
+<h1>Заявки <small>({{.Broi}})</small></h1>
+
+<div class="karta tablica-obvivka">
+    <table>
         <tr>
             <th>№</th><th>Име</th><th>Телефон</th><th>Адрес</th>
             <th>Вид</th><th>Проблем</th><th>Дата</th><th>Статус</th>
@@ -18,7 +13,7 @@
         <tr>
             <td>{{.ID}}</td>
             <td>{{.Ime}}</td>
-            <td>{{.Telefon}}</td>
+            <td><a href="tel:{{.Telefon}}">{{.Telefon}}</a></td>
             <td>{{.Adres}}</td>
             <td>{{.Vid}}</td>
             <td>{{.Opisanie}}</td>
@@ -30,7 +25,7 @@
                         <option value="{{.}}" {{if eq . $z.Status}}selected{{end}}>{{.}}</option>
                         {{end}}
                     </select>
-                    <button type="submit">Запази</button>
+                    <button type="submit" class="buton buton-malak">Запази</button>
                 </form>
             </td>
         </tr>
@@ -38,7 +33,6 @@
         <tr><td colspan="8">Още няма заявки.</td></tr>
         {{end}}
     </table>
+</div>
 
-    <p><a href="/zaiavka">Нова заявка</a> | <a href="/">Към началото</a></p>
-</body>
-</html>
+{{template "dolu"}}

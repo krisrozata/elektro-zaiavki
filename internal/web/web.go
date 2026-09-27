@@ -52,6 +52,7 @@ func NovServer(b *baza.Baza, papkaShabloni, adminIme, adminParola string) (*Serv
 func (s *Server) Marshruti() *http.ServeMux {
     mux := http.NewServeMux()
     mux.HandleFunc("/", s.nachalo)
+	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
     mux.HandleFunc("/kontakti", s.kontakti)
     mux.HandleFunc("GET /zaiavka", s.formaZaiavka)
     mux.HandleFunc("POST /zaiavka", s.priemiZaiavka)

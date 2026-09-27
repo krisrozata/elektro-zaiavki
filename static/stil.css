@@ -1,0 +1,210 @@
+:root {
+    --osnoven: #f5b301;
+    --tamen: #1f2933;
+    --fon: #f4f6f8;
+    --tekst: #1f2933;
+    --siv: #6b7280;
+    --granica: #e5e7eb;
+    --radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--fon);
+    color: var(--tekst);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.kontejner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Горна лента */
+.gorna-lenta {
+    background: var(--tamen);
+}
+
+.lenta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+}
+
+.logo {
+    color: var(--osnoven);
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+nav a:hover {
+    color: var(--osnoven);
+}
+
+/* Съдържание */
+h1 {
+    margin: 32px 0 16px;
+}
+
+h1 small {
+    color: var(--siv);
+    font-weight: 400;
+}
+
+.karta {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+}
+
+.geroi {
+    text-align: center;
+    padding: 48px 24px;
+    margin-top: 32px;
+}
+
+.geroi h1 {
+    margin-top: 0;
+}
+
+.geroi p {
+    color: var(--siv);
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+}
+
+/* Бутони */
+.buton {
+    display: inline-block;
+    background: var(--osnoven);
+    color: var(--tamen);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buton:hover {
+    filter: brightness(0.93);
+}
+
+.buton-malak {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+}
+
+/* Форми */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+input,
+select,
+textarea {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px;
+    border: 1px solid var(--granica);
+    border-radius: var(--radius);
+    font: inherit;
+    font-weight: 400;
+    background: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--osnoven);
+    border-color: transparent;
+}
+
+/* Таблица */
+.tablica-obvivka {
+    overflow-x: auto;
+    padding: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--granica);
+    vertical-align: top;
+}
+
+th {
+    background: #f9fafb;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--siv);
+    white-space: nowrap;
+}
+
+td form {
+    display: flex;
+    gap: 6px;
+}
+
+td select {
+    width: auto;
+    margin-top: 0;
+    padding: 6px;
+}
+
+/* Долна лента */
+.dolna-lenta {
+    text-align: center;
+    color: var(--siv);
+    padding: 24px 0;
+    font-size: 0.9rem;
+}
+
+/* Телефони */
+@media (max-width: 600px) {
+    .logo {
+        font-size: 1rem;
+    }
+
+    nav a {
+        margin-left: 12px;
+        font-size: 0.9rem;
+    }
+
+    .karta {
+        padding: 16px;
+    }
+}
