@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Нова заявка</title>
+</head>
+<body>
+    <h1>Нова заявка</h1>
+
+    <form method="POST" action="/zaiavka">
+        <p>Име:<br><input type="text" name="ime" required></p>
+        <p>Телефон:<br><input type="tel" name="telefon" required></p>
+        <p>Адрес:<br><input type="text" name="adres"></p>
+        <p>Вид работа:<br>
+        <select name="vid">
+        <option value="Ремонт">Ремонт</option>
+        <option value="Монтаж">Монтаж</option>
+        <option value="Проверка на инсталация">Проверка на инсталация</option>
+            </select>
+        </p>
+        <p>Какъв е проблемът:<br><textarea name="opisanie" rows="4"></textarea></p>
+        <button type="submit">Изпрати</button>
+    </form>
+
+    <a href="/">Към началото</a>
+</body>
+</html>

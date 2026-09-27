@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявки</title>
+</head>
+<body>
+    <h1>Заявки</h1>
+    <p>Общо заявки: {{.Broi}}</p>
+
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>№</th><th>Име</th><th>Телефон</th><th>Адрес</th>
+            <th>Вид</th><th>Проблем</th><th>Дата</th><th>Статус</th>
+        </tr>
+        {{range .Zaiavki}}
+        {{$z := .}}
+        <tr>
+            <td>{{.ID}}</td>
+            <td>{{.Ime}}</td>
+            <td>{{.Telefon}}</td>
+            <td>{{.Adres}}</td>
+            <td>{{.Vid}}</td>
+            <td>{{.Opisanie}}</td>
+            <td>{{.Suzdadena.Format "02.01.2006 15:04"}}</td>
+            <td>
+                <form method="POST" action="/zaiavki/{{.ID}}/status">
+                    <select name="status">
+                        {{range $.Statusi}}
+                        <option value="{{.}}" {{if eq . $z.Status}}selected{{end}}>{{.}}</option>
+                        {{end}}
+                    </select>
+                    <button type="submit">Запази</button>
+                </form>
+            </td>
+        </tr>
+        {{else}}
+        <tr><td colspan="8">Още няма заявки.</td></tr>
+        {{end}}
+    </table>
+
+    <p><a href="/zaiavka">Нова заявка</a> | <a href="/">Към началото</a></p>
+</body>
+</html>
