@@ -1,6 +1,8 @@
 package web
 
 import (
+    "crypto/sha256"
+    "crypto/subtle"
     "errors"
     "html/template"
     "log"
@@ -10,10 +12,11 @@ import (
 
     "elektro-zaiavki/internal/baza"
 )
-
 type Server struct {
-    baza     *baza.Baza
-    shabloni *template.Template
+    baza        *baza.Baza
+    shabloni    *template.Template
+    adminIme    string
+    adminParola string
 }
 
 type stranica struct {
@@ -33,12 +36,17 @@ type stranicaSpisak struct {
     Statusi []string
 }
 
-func NovServer(b *baza.Baza, papkaShabloni string) (*Server, error) {
+func NovServer(b *baza.Baza, papkaShabloni, adminIme, adminParola string) (*Server, error) {
     t, err := template.ParseGlob(papkaShabloni + "/*.html")
     if err != nil {
         return nil, err
     }
-    return &Server{baza: b, shabloni: t}, nil
+    return &Server{
+        baza:        b,
+        shabloni:    t,
+        adminIme:    adminIme,
+        adminParola: adminParola,
+    }, nil
 }
 
 func (s *Server) Marshruti() *http.ServeMux {
@@ -47,11 +55,12 @@ func (s *Server) Marshruti() *http.ServeMux {
     mux.HandleFunc("/kontakti", s.kontakti)
     mux.HandleFunc("GET /zaiavka", s.formaZaiavka)
     mux.HandleFunc("POST /zaiavka", s.priemiZaiavka)
-    mux.HandleFunc("GET /zaiavki", s.spisakZaiavki)
-    mux.HandleFunc("POST /zaiavki/{id}/status", s.smeniStatus)
+    mux.HandleFunc("GET /blagodarim", s.blagodarim)
+
+    mux.HandleFunc("GET /zaiavki", s.samoAdmin(s.spisakZaiavki))
+    mux.HandleFunc("POST /zaiavki/{id}/status", s.samoAdmin(s.smeniStatus))
     return mux
 }
-
 func (s *Server) nachalo(w http.ResponseWriter, r *http.Request) {
     s.pokazhi(w, "nachalo.html", stranica{
         Zaglavie: "Електро заявки",
@@ -92,7 +101,7 @@ func (s *Server) priemiZaiavka(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    http.Redirect(w, r, "/zaiavki", http.StatusSeeOther)
+    http.Redirect(w, r, "/blagodarim", http.StatusSeeOther)
 }
 
 func (s *Server) spisakZaiavki(w http.ResponseWriter, r *http.Request) {
@@ -149,4 +158,27 @@ func (s *Server) pokazhi(w http.ResponseWriter, ime string, danni any) {
         log.Println(err)
         http.Error(w, "Грешка при показване на страницата", http.StatusInternalServerError)
     }
+}
+func (s *Server) blagodarim(w http.ResponseWriter, r *http.Request) {
+    s.pokazhi(w, "blagodarim.html", nil)
+}
+
+func (s *Server) samoAdmin(sledvasht http.HandlerFunc) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        ime, parola, ok := r.BasicAuth()
+
+        if !ok || !ednakvi(ime, s.adminIme) || !ednakvi(parola, s.adminParola) {
+            w.Header().Set("WWW-Authenticate", `Basic realm="Заявки", charset="UTF-8"`)
+            http.Error(w, "Нужен е вход", http.StatusUnauthorized)
+            return
+        }
+
+        sledvasht(w, r)
+    }
+}
+
+func ednakvi(a, b string) bool {
+    hashA := sha256.Sum256([]byte(a))
+    hashB := sha256.Sum256([]byte(b))
+    return subtle.ConstantTimeCompare(hashA[:], hashB[:]) == 1
 }
